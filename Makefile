@@ -6,7 +6,7 @@
 #    By: World 42  <world42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/03 14:55:19 by ale-batt          #+#    #+#              #
-#*   Updated: 2017/03/14 17:55:28 by ale-batt         ###   ########.fr       *#
+#*   Updated: 2017/03/14 18:06:19 by ale-batt         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ O_DIR	=	.objs/
 H_DIRS	=	includes
 
 LIBFT	=	./libft
-LIBNETWORK = ./libnetwork
 
 CC		=	gcc
 FLAGS	=	-Wall -Werror -Wextra
@@ -34,11 +33,9 @@ V = 0
 # debug mode
 G = 0
 
-LIB		+=	-L$(LIBNETWORK) -lnetwork
 LIB		+=	-L$(LIBFT) -lft
 
 INCLUDES =	-I./$(H_DIRS) -I$(LIBFT)/includes
-INCLUDES +=	-I$(LIBNETWORK)/includes
 
 C = \033[1;33m
 U = $(C)[$(NAME)]----->\033[0m
@@ -52,13 +49,10 @@ BAR = $(shell printf "%`expr $(BARC) '*' 100 / $(BART)`s" | tr ' ' '=')
 
 #--------------------------------------------------------------------#
 
-all		:	$(LIBFT)/libft.a $(LIBNETWORK)/libnetwork.a $(O_DIRS) $(NAME)
+all		:	$(LIBFT)/libft.a $(O_DIRS) $(NAME)
 
 $(LIBFT)/libft.a:
 			@make -C $(LIBFT)
-
-$(LIBNETWORK)/libnetwork.a:
-			@make -C $(LIBNETWORK)
 
 $(O_DIRS):
 			@mkdir -p $(O_DIR) $(O_DIRS)
@@ -81,18 +75,15 @@ clean	:
 			@echo "$(U)$(C)[CLEAN]\033[0;32m"
 			@echo "$(SKIP)$(U)$(C)[CLEAN:\033[1;32m   DONE$(C)]\033[0m"
 #			@make -C $(LIBFT) clean
-			@make -C $(LIBNETWORK) clean
 
 fclean	:	clean
 			@echo "$(U)$(C)[F-CLEAN]\033[0;32m"
 			@rm -rf $(NAME)
 			@echo "$(SKIP)$(U)$(C)[F-CLEAN:\033[1;32m DONE$(C)]\033[0m"
 #			@make -C $(LIBFT) fclean
-			@make -C $(LIBNETWORK) fclean
 
 lib		:
 			@make -C $(LIBFT) re
-			@make -C $(LIBNETWORK) re
 
 re		:	fclean all
 
