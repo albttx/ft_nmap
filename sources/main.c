@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:26 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/15 14:36:02 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/15 16:30:42 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int		main(int ac, char **av)
 	{
 		dbg_print_flags();
 		dbg_print_ip();
+		puts("----------------------");
+		ft_nmap();
 	}
 	else
 		return (usage(av[0]));
