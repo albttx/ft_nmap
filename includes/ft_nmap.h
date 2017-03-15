@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/15 14:35:56 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:22:07 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <netdb.h>
 # include <netinet/ip.h>
 # include <netinet/ip_icmp.h>
+# include <pcap/pcap.h>
 
 # include <signal.h>
 
@@ -54,6 +55,7 @@ t_env				g_env;
 char				*hostname_to_ip(const char *hostname);
 
 int					parser(char **av);
+int					ft_nmap(void);
 
 void				dbg_print_flags(void);
 void				dbg_print_ip(void);

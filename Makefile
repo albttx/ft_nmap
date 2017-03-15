@@ -6,7 +6,7 @@
 #    By: World 42  <world42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/03 14:55:19 by ale-batt          #+#    #+#              #
-#*   Updated: 2017/03/14 18:06:19 by ale-batt         ###   ########.fr       *#
+#*   Updated: 2017/03/15 15:48:58 by ale-batt         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ V = 0
 # debug mode
 G = 0
 
-LIB		+=	-L$(LIBFT) -lft
+LIB		+=	-L$(LIBFT) -lft -lpcap
 
 INCLUDES =	-I./$(H_DIRS) -I$(LIBFT)/includes
 
