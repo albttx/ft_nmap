@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/14 20:25:22 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/15 14:35:56 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,22 @@
 
 # include <signal.h>
 
+typedef enum		e_type
+{
+	SYN				= 1,
+	NUL				= 2,
+	ACK				= 4,
+	FIN				= 8,
+	XMAS			= 16,
+	UDP				= 32,
+}					t_type;
+
 typedef struct		s_env
 {
 	t_list			*ip;
 	int				port[2];
+	int				thread;
+	enum e_type		type_flags;
 }					t_env;
 
 typedef struct		s_ip
@@ -42,6 +54,8 @@ t_env				g_env;
 char				*hostname_to_ip(const char *hostname);
 
 int					parser(char **av);
-void				parse_file(char *arg);
+
+void				dbg_print_flags(void);
+void				dbg_print_ip(void);
 
 #endif
