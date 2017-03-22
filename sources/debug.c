@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 12:22:18 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/22 15:00:48 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:24:37 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	dbg_print_flags(void)
 {
-	(g_env.type_flags & SYN) ? printf("%sSYN ", GREEN) : printf("%sSYN ", RED);
-	(g_env.type_flags & NUL) ? printf("%sNULL ", GREEN) : printf("%sNULL ", RED);
-	(g_env.type_flags & ACK) ? printf("%sACK ", GREEN) : printf("%sACK ", RED);
-	(g_env.type_flags & FIN) ? printf("%sFIN ", GREEN) : printf("%sFIN ", RED);
-	(g_env.type_flags & XMAS) ? printf("%sXMAS ", GREEN) : printf("%sXMAS ", RED);
-	(g_env.type_flags & UDP) ? printf("%sUDP", GREEN) : printf("%sUDP", RED);
+	(g_env.type_flags & S_SYN) ? printf("%sSYN ", GREEN) : printf("%sSYN ", RED);
+	(g_env.type_flags & S_NUL) ? printf("%sNULL ", GREEN) : printf("%sNULL ", RED);
+	(g_env.type_flags & S_ACK) ? printf("%sACK ", GREEN) : printf("%sACK ", RED);
+	(g_env.type_flags & S_FIN) ? printf("%sFIN ", GREEN) : printf("%sFIN ", RED);
+	(g_env.type_flags & S_XMAS) ? printf("%sXMAS ", GREEN) : printf("%sXMAS ", RED);
+	(g_env.type_flags & S_UDP) ? printf("%sUDP", GREEN) : printf("%sUDP", RED);
 	printf("%s\n", DEFAULT);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:26 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/22 12:19:41 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:26:25 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		init(void)
 	g_env.port[1] = 1024;
 	g_env.id = (getpid() & 0xffff) | 0x8000;
 	get_local_ip(g_env.source);
-	g_env.type_flags = SYN | NUL | ACK | FIN | XMAS | UDP;
+	g_env.type_flags = S_SYN | S_NUL | S_ACK | S_FIN | S_XMAS | S_UDP;
 }
 
 int		main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:22:20 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/22 13:32:46 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/22 19:27:02 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,17 @@ static void	parse_scantype(char *arg)
 	for (y = 0; types[y]; y++)
 	{
 		if (ft_strequ("SYN", types[y]))
-			g_env.type_flags |= SYN;
+			g_env.type_flags |= S_SYN;
 		else if (ft_strequ("NULL", types[y]))
-			g_env.type_flags |= NUL;
+			g_env.type_flags |= S_NUL;
 		else if (ft_strequ("ACK", types[y]))
-			g_env.type_flags |= ACK;
+			g_env.type_flags |= S_ACK;
 		else if (ft_strequ("FIN", types[y]))
-			g_env.type_flags |= FIN;
+			g_env.type_flags |= S_FIN;
 		else if (ft_strequ("XMAS", types[y]))
-			g_env.type_flags |= XMAS;
+			g_env.type_flags |= S_XMAS;
 		else if (ft_strequ("UDP", types[y]))
-			g_env.type_flags |= UDP;
+			g_env.type_flags |= S_UDP;
 	}
 	ft_freetab(types);
 }
