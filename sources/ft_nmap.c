@@ -6,36 +6,31 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 15:32:11 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/15 19:24:07 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/20 17:42:47 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nmap.h"
+	/*char	errbuff[PCAP_ERRBUF_SIZE];*/
+	/*char	*device;*/
+	/*pcap_t	*descr;*/
+	/*device = pcap_lookupdev(errbuff);*/
+	/*if (!device)*/
+	/*{*/
+		/*fprintf(stderr, "pcap_lookupdev error: %s\n", errbuff);*/
+		/*device = "eth0";*/
+		/*[>return ;<]*/
+	/*}*/
+	/*else*/
+		/*printf("/!\\ WTF IT'S WORKED !!!!\n");*/
 
-void	scan(t_ip *ip)
-{
-	char	errbuff[PCAP_ERRBUF_SIZE];
-	char	*device;
-	pcap_t	*descr;
+	/*descr = pcap_open_live(device, BUFSIZ, 1, 1000, errbuff);*/
+	/*if (!descr)*/
+	/*{*/
+		/*fprintf(stderr, "pcap_open_live error: %s\n", errbuff);*/
+		/*exit(EXIT_FAILURE);*/
+	/*}*/
 
-	device = pcap_lookupdev(errbuff);
-	if (!device)
-	{
-		fprintf(stderr, "pcap_lookupdev error: %s\n", errbuff);
-		device = ft_strdup("eth0");
-		/*return ;*/
-	}
-	else
-		printf("/!\\ WTF IT'S WORKED !!!!\n");
-
-	descr = pcap_open_live(device, BUFSIZ, 1, 1000, errbuff);
-	if (!descr)
-	{
-		fprintf(stderr, "pcap_open_live error: %s\n", errbuff);
-		exit(EXIT_FAILURE);
-	}
-	free(device);
-}
 
 int		ft_nmap(void)
 {

@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 12:22:18 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/15 13:14:48 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:00:48 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,20 @@ void	dbg_print_ip(void)
 		printf("    %-16s %s\n", ip->ipv4name, ip->hostname);
 		tmp = tmp->next;
 	}
+}
+
+void	dbg_print_port(void)
+{
+	printf("Port %d to %d\n", g_env.port[0], g_env.port[1]);
+}
+
+void	dbg_print_tcp_types(struct tcphdr *tcph)
+{
+	(tcph->syn == 1) ? printf("%sSYN ", GREEN) : printf("%sSYN ", RED);
+	(tcph->ack == 1) ? printf("%sACK ", GREEN) : printf("%sACK ", RED);
+	(tcph->fin == 1) ? printf("%sFIN ", GREEN) : printf("%sFIN ", RED);
+	(tcph->rst == 1) ? printf("%sRST ", GREEN) : printf("%sRST ", RED);
+	(tcph->psh == 1) ? printf("%sPSH ", GREEN) : printf("%sPSH ", RED);
+	(tcph->urg == 1) ? printf("%sURG ", GREEN) : printf("%sURG ", RED);
+	printf("%s\n", DEFAULT);
 }

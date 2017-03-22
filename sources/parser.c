@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:22:20 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/15 14:39:56 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/22 13:32:46 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ static void	parse_ports(char *arg)
 	p = ft_strsplit(arg, '-');
 	g_env.port[0] = ft_atoi(p[0]);
 	g_env.port[1] = ft_atoi(p[1]);
+	if (g_env.port[0] < 0 || g_env.port[0] > 65535 ||
+		g_env.port[1] < 0 || g_env.port[1] > 65535)
+	{
+		fprintf(stderr, "Port must be 65535 > port < 0.\n");
+		ft_freetab(p);
+		exit(EXIT_FAILURE);
+	}
 	if (g_env.port[0] > g_env.port[1])
 	{
 		fprintf(stderr, "Your port range %d-%d is backwards.\n",
