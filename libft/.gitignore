@@ -3,3 +3,4 @@ TAGS
 .objs
 
 test/cmocka
+result

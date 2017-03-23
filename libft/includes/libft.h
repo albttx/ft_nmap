@@ -6,7 +6,7 @@
 /*   By: world42 <world42@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/29 22:42:32 by world42           #+#    #+#             */
-/*   Updated: 2016/12/11 19:31:26 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/23 15:03:59 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # include "puts.h"
 # include "rand.h"
 # include "ft_string.h"
-# include "ft_log.h"
 # include "debug.h"
 
 #endif

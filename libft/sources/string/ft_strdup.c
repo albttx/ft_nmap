@@ -6,7 +6,7 @@
 /*   By: world42 <world42@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 14:59:05 by world42           #+#    #+#             */
-/*   Updated: 2017/03/14 20:57:22 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/16 22:08:59 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 
 	len = ft_strlen(s1);
 	s2 = ft_strnew(len + 1);
-	ft_strcpy(s2, s1);
+	ft_strncpy(s2, s1, len);
 	return (s2);
 }
 
