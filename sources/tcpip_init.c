@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 18:37:46 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/22 20:06:22 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/23 13:26:05 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	set_tcp_header(struct tcphdr *tcph, enum e_tcp_type flags)
 	tcph->seq = htonl(1105024978);
 	tcph->ack_seq = 0;
 	tcph->doff = sizeof(struct tcphdr) / 4;
+	tcph->fin = (flags & FIN) ? 1 : 0;
 	tcph->syn = (flags & SYN) ? 1 : 0;
 	tcph->rst = (flags & RST) ? 1 : 0;
-	tcph->fin = (flags & FIN) ? 1 : 0;
 	tcph->psh = (flags & PSH) ? 1 : 0;
 	tcph->ack = (flags & ACK) ? 1 : 0;
 	tcph->urg = (flags & URG) ? 1 : 0;
@@ -58,11 +58,12 @@ void	set_pseudo_header(t_pseudo_hdr *psh, struct sockaddr_in *dest)
 
 void	set_peer(t_peer *peer, int sock, char *addr)
 {
-	ft_bzero(peer, sizeof(*peer));
+	ft_bzero(peer, sizeof(t_peer));
 	peer->sock = sock;
 	peer->iph = (struct ip *)peer->buff;
 	peer->tcph = (struct tcphdr *)(peer->buff + sizeof(struct ip));
 
+	ft_bzero(&peer->dest, sizeof(peer->dest));
 	(peer->dest).sin_family = AF_INET;
 	(peer->dest).sin_addr.s_addr = inet_addr(addr);
 }

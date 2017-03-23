@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scan.c                                             :+:      :+:    :+:   */
+/*   tcp_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/16 19:30:55 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/23 17:20:35 by ale-batt         ###   ########.fr       */
+/*   Created: 2017/03/23 16:26:06 by ale-batt          #+#    #+#             */
+/*   Updated: 2017/03/23 16:32:25 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nmap.h"
 
-void	scan(t_ip *ip, t_list *port_lst)
+enum e_tcp_type		tcp_to_enum(struct tcphdr *tcph)
 {
-	pthread_t			sniffer_thread;
+	enum e_tcp_type		types;
 
-	if (pthread_create(&sniffer_thread, NULL, listener, (void *)port_lst) < 0)
-	{
-		perror("pthread_create");
-		exit(EXIT_FAILURE);
-	}
-
-	scan_syn(ip->ipv4name);
-	puts("scan_syn DONE");
-
-	if (pthread_join(sniffer_thread, NULL))
-	{
-		perror("pthread_join");
-		exit(EXIT_FAILURE);
-	}
-	print_port_lst(port_lst);
+	types = 0;
+	if (tcph->syn == 1) types |= SYN;
+	if (tcph->ack == 1) types |= ACK;
+	if (tcph->fin == 1) types |= FIN;
+	if (tcph->rst == 1) types |= RST;
+	if (tcph->psh == 1) types |= PSH;
+	if (tcph->urg == 1) types |= URG;
+	return (types);
 }

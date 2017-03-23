@@ -6,44 +6,49 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 15:32:11 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/20 17:42:47 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:39:19 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nmap.h"
-	/*char	errbuff[PCAP_ERRBUF_SIZE];*/
-	/*char	*device;*/
-	/*pcap_t	*descr;*/
-	/*device = pcap_lookupdev(errbuff);*/
-	/*if (!device)*/
-	/*{*/
-		/*fprintf(stderr, "pcap_lookupdev error: %s\n", errbuff);*/
-		/*device = "eth0";*/
-		/*[>return ;<]*/
-	/*}*/
-	/*else*/
-		/*printf("/!\\ WTF IT'S WORKED !!!!\n");*/
 
-	/*descr = pcap_open_live(device, BUFSIZ, 1, 1000, errbuff);*/
-	/*if (!descr)*/
-	/*{*/
-		/*fprintf(stderr, "pcap_open_live error: %s\n", errbuff);*/
-		/*exit(EXIT_FAILURE);*/
-	/*}*/
+static t_list		*init_port_list(void)
+{
+	t_list	*port_lst;
+	t_port	port;
+	int		i;
 
+	port_lst = NULL;
+	for (i = g_env.port[0]; i <= g_env.port[1]; i++)
+	{
+		ft_bzero(&port, sizeof(port));
+		port.port = i;
+		port.syn_state = FILTERED;
+		port.ack_state = FILTERED;
+		port.fin_state = OPEN;
+		port.nul_state = OPEN;
+		port.udp_state = CLOSE;
+		port.xmas_state = OPEN;
+		ft_lstadd_end(&port_lst, ft_lstnew(&port, sizeof(port)));
+	}
+	return (port_lst);
+}
 
 int		ft_nmap(void)
 {
-	t_list	*tmp;
+	t_list	*tmp_ip;
+	t_list	*port_lst;
 	t_ip	*ip;
 
-	tmp = g_env.ip;
-	while (tmp)
+	tmp_ip = g_env.ip;
+	while (tmp_ip)
 	{
-		ip = tmp->content;
+		port_lst = init_port_list();
+		ip = tmp_ip->content;
 		printf("Start Scan on: %s %s \n", ip->hostname, ip->ipv4name);
-		scan(ip);
-		tmp = tmp->next;
+		scan(ip, port_lst);
+		ft_lstfree(port_lst);
+		tmp_ip = tmp_ip->next;
 	}
 	return (1);
 }

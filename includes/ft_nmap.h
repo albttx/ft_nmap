@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/22 20:09:38 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/23 17:19:21 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,29 @@
 # include <pthread.h>
 # include <signal.h>
 
-#define SYN_FLAGS	SYN | ACK
+# define SYN_FLAGS	SYN | ACK
+
+# define OPEN 1
+# define FILTERED 0
+# define CLOSE -1
 
 typedef enum			e_scan_type
 {
 	S_SYN				= 1,
-	S_NUL				= 2,
-	S_ACK				= 4,
-	S_FIN				= 8,
-	S_XMAS				= 16,
-	S_UDP				= 32,
+	S_ACK				= 2,
+	S_FIN				= 4,
+	S_NUL				= 8,
+	S_UDP				= 16,
+	S_XMAS				= 32,
 }						t_scan_type;
 
 typedef enum			e_tcp_type
 {
 	SYN 				= 1,
-	RST 				= 2,
+	ACK 				= 2,
 	FIN 				= 4,
-	PSH 				= 8,
-	ACK 				= 16,
+	RST 				= 8,
+	PSH 				= 16,
 	URG 				= 32,
 }						t_tcp_type;
 
@@ -84,29 +88,44 @@ typedef struct			s_peer
 	struct sockaddr_in	dest;
 }						t_peer;
 
+typedef struct			s_port
+{
+	int					port;
+	int					syn_state:2;
+	int					ack_state:2;
+	int					fin_state:2;
+	int					nul_state:2;
+	int					udp_state:2;
+	int					xmas_state:2;
+}						t_port;
+
 t_env					g_env;
 
-char					*hostname_to_ip(const char *hostname);
-unsigned short			csum(unsigned short *ptr, int nbytes);
-
-int						parser(char **av);
 int						ft_nmap(void);
+int						parser(char **av);
+void					print_port_lst(t_list *port_lst);
 
 void					set_ip_header(struct ip *iph, struct sockaddr_in *dest);
 void					set_tcp_header(struct tcphdr *tcph, enum e_tcp_type flags);
 void					set_pseudo_header(t_pseudo_hdr *psh, struct sockaddr_in *dest);
 void					set_peer(t_peer *peer, int sock, char *addr);
 
-void					send_range(int sock, int range[], char *hostip, enum e_tcp_type flags);
+void					scan(t_ip *ip, t_list *port_lst);
+
+void					scan_syn(char *ipv4name);
+int						syn_set(enum e_tcp_type types);
+int						syn_default(void);
 
 int						create_socket(void);
+void					send_range(int sock, int range[], char *hostip, enum e_tcp_type flags);
+void					*recv_ack(void *ptr);
+void					*listener(void *ptr);
 
 void					get_local_ip(char *buffer);
+char					*hostname_to_ip(const char *hostname);
+unsigned short			csum(unsigned short *ptr, int nbytes);
 
-void					scan(t_ip *ip);
-void					scan_syn(char *ipv4name);
-
-void					*recv_ack(void *ptr);
+enum e_tcp_type		tcp_to_enum(struct tcphdr *tcph);
 
 void					dbg_print_flags(void);
 void					dbg_print_ip(void);
