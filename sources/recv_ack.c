@@ -6,11 +6,12 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:46:54 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/24 15:20:07 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:57:48 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nmap.h"
+#include <poll.h>
 
 static void		set_in_list(t_list *port_lst, int port, enum e_tcp_type types)
 {
@@ -58,15 +59,16 @@ static void		process_return(t_list *port_lst, char buff[], ssize_t size)
 		printf("\n");
 }
 
-static void	listening(t_list *port_lst)
+static void		listening(t_list *port_lst)
 {
 	int					sock;
 	char				buff[65536];
 	struct sockaddr_in	from;
 	socklen_t			fromlen;
 	ssize_t				ret;
-	fd_set				fds;
-	struct timeval		wait;
+	struct pollfd		pfd[1];
+	nfds_t				ndfs;
+	int					timeout;
 
 	puts("start thread");
 	fromlen = sizeof(from);
@@ -76,17 +78,25 @@ static void	listening(t_list *port_lst)
 		perror("recv sock");
 		exit(EXIT_FAILURE);
 	}
-	FD_ZERO(&fds);
-	FD_SET(sock, &fds);
-	wait.tv_sec = 3;
-	wait.tv_usec = 500;
+
+	ndfs = 1;
+	timeout = 2 * 60 * 60; // 2 sec
+	pfd[0].fd = sock;
+	pfd[0].events = POLLIN;
+	pfd[0].revents = 0;
+
 	while (42)
 	{
 		ft_bzero(&from, sizeof(from));
 		ft_bzero(buff, sizeof(buff));
 		puts("wait to recv...");
-		if (select(sock + 1, &fds, (fd_set *)0, (fd_set *)0, &wait) > 0)
+		if (poll(pfd, ndfs, timeout) > 0)
 		{
+			if (pfd[0].revents == POLLERR)
+			{
+				perror("poll() revents == POLLERR");
+				break ;
+			}
 			ret = recvfrom(sock, buff, sizeof(buff), 0, (struct sockaddr *)&from, &fromlen);
 			process_return(port_lst, buff, ret);
 		}
@@ -97,7 +107,7 @@ static void	listening(t_list *port_lst)
 	pthread_exit(NULL);
 }
 
-void		*listener(void *ptr)
+void			*listener(void *ptr)
 {
 	listening(ptr);
 	return (NULL);
