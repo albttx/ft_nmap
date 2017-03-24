@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/24 15:20:44 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:14:17 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <netinet/ip.h>
 # include <netinet/tcp.h>
 # include <netinet/ip_icmp.h>
+# include <netinet/if_ether.h>
 # include <pcap/pcap.h>
 # include <pthread.h>
 # include <signal.h>

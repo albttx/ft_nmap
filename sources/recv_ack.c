@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:46:54 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/24 15:57:48 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/24 18:46:15 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		process_return(t_list *port_lst, char buff[], ssize_t size)
 		printf("\n");
 }
 
-static void		listening(t_list *port_lst)
+static void		listening_socket(t_list *port_lst)
 {
 	int					sock;
 	char				buff[65536];
@@ -107,8 +107,61 @@ static void		listening(t_list *port_lst)
 	pthread_exit(NULL);
 }
 
+void	callback(unsigned char *ptr, const struct pcap_pkthdr *pkthdr, const unsigned char *pkt)
+{
+	struct ether_header		*ethh;
+	struct ip				*iph;
+	struct tcphdr			*tcph;
+	unsigned short			iplen;
+	struct sockaddr_in		src;
+	struct sockaddr_in		dst;
+
+	ethh = (struct ether_header *)pkt;
+	iph = (struct ip *)(pkt + sizeof(struct ether_header));
+	if (iph->ip_p == IPPROTO_TCP)
+	{
+		iplen = iph->ip_hl * 4;
+		if (iplen < 20)
+		{
+			printf("ERROR: iplen = %d bytes, packet too small\n", iplen);
+			return ;
+		}
+		tcph = (struct tcphdr *)((void *)pkt + sizeof(*ethh) + iplen);
+		ft_bzero(&src, sizeof(src));
+		ft_bzero(&dst, sizeof(dst));
+		src.sin_addr = iph->ip_src;
+		dst.sin_addr = iph->ip_dst;
+		if (ntohs(tcph->source) == 43591) return ;
+		printf("port %d ", ntohs(tcph->source));
+		printf(" From: %s To: %s\n", inet_ntoa(iph->ip_src), inet_ntoa(iph->ip_dst));
+		/*set_in_list(port_lst, ntohs(tcph->source), tcp_to_enum(tcph));*/
+		dbg_print_tcp_types(tcph);
+	}
+	/*printf("Receive pkt size %d\n", pkthdr->len);*/
+
+}
+
+static void		listening_pcap(t_list *port_lst)
+{
+	char	errbuff[PCAP_ERRBUF_SIZE];
+	pcap_t	*handler;
+
+	handler = pcap_open_live("eth0", 65536, 1, 0, errbuff);
+	if (handler == NULL)
+	{
+		perror("pcap_open_live");
+		exit(EXIT_FAILURE);
+	}
+	if (pcap_dispatch(handler, 1024, callback, NULL) == -1)
+	{
+		pcap_perror(handler, "pcap_dispatch");
+	}
+	pthread_exit(NULL);
+}
+
 void			*listener(void *ptr)
 {
-	listening(ptr);
+	/*listening_socket(ptr);*/
+	listening_pcap(ptr);
 	return (NULL);
 }
