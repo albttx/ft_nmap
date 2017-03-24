@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:31:08 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/23 17:29:49 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:27:23 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ static void		print_state(t_port *port)
 	printf("\n");
 }	
 
+static int		is_default(t_port *port)
+{
+	if (port->syn_state == syn_default() &&
+		port->ack_state == ack_default() &&
+		port->fin_state == fin_default())
+	{
+		return (1);
+	}
+	return (-1);
+}
+
 void			print_port_lst(t_list *port_lst)
 {
 	t_list	*tmp;
@@ -51,7 +62,8 @@ void			print_port_lst(t_list *port_lst)
 	while (tmp)
 	{
 		port = tmp->content;
-		print_state(port);
+		if (is_default(port) == -1)
+			print_state(port);
 		tmp = tmp->next;
 	}
 }

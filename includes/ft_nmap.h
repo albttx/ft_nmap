@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/23 17:19:21 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:20:44 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,14 @@ void					scan(t_ip *ip, t_list *port_lst);
 void					scan_syn(char *ipv4name);
 int						syn_set(enum e_tcp_type types);
 int						syn_default(void);
+
+void					scan_fin(char *ipv4name);
+int						fin_set(enum e_tcp_type types);
+int						fin_default(void);
+
+void					scan_ack(char *ipv4name);
+int						ack_set(enum e_tcp_type types);
+int						ack_default(void);
 
 int						create_socket(void);
 void					send_range(int sock, int range[], char *hostip, enum e_tcp_type flags);

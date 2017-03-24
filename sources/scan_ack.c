@@ -1,49 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scan_syn.c                                         :+:      :+:    :+:   */
+/*   scan_ack.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/16 15:09:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/24 15:11:31 by ale-batt         ###   ########.fr       */
+/*   Created: 2017/03/24 14:37:34 by ale-batt          #+#    #+#             */
+/*   Updated: 2017/03/24 15:17:52 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nmap.h"
 
 /*
- *  -= SYN SCAN =-
+ *  -= ACK SCAN =-
  *
- *  Send SYN
+ *  Send ACK
  *  Wait for :
- *  	OPEN      SYN & ACK
- *  	CLOSE     RST & ACK
- *  	FILTERED  no response
+ *  	OPEN         impossible
+ *  	CLOSE        impossible
+ *  	FILTERED     no response
+ *  	NO FILTERED  RST
 */
 
-int		syn_default(void)
+int		ack_default(void)
 {
 	return (FILTERED);
 }
 
-int		syn_set(enum e_tcp_type types)
+int		ack_set(enum e_tcp_type types)
 {
-	if (types & SYN && types & ACK)
+	if (types & RST)
 		return (OPEN);
-	else if (types & RST && types & ACK)
-		return (CLOSE);
-	return (syn_default());
+	return (ack_default());
 }
 
-void	scan_syn(char *ipv4name)
+void	scan_ack(char *ipv4name)
 {
 	int				sock;
 
 	sock = create_socket();
 
-	send_range(sock, g_env.port, ipv4name, SYN);
+	send_range(sock, g_env.port, ipv4name, ACK);
 
 	close(sock);
-	puts("SCAN SYN DONE");
+	puts("SCAN ACK DONE");
 }

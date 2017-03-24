@@ -1,49 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scan_syn.c                                         :+:      :+:    :+:   */
+/*   scan_fin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/16 15:09:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/24 15:11:31 by ale-batt         ###   ########.fr       */
+/*   Created: 2017/03/24 14:37:34 by ale-batt          #+#    #+#             */
+/*   Updated: 2017/03/24 15:16:13 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nmap.h"
 
 /*
- *  -= SYN SCAN =-
+ *  -= FIN SCAN =-
  *
- *  Send SYN
+ *  Send FIN
  *  Wait for :
- *  	OPEN      SYN & ACK
+ *  	OPEN      linux: no response | window: 
  *  	CLOSE     RST & ACK
- *  	FILTERED  no response
+ *  	FILTERED  impossible
 */
 
-int		syn_default(void)
+int		fin_default(void)
 {
-	return (FILTERED);
+	return (OPEN);
 }
 
-int		syn_set(enum e_tcp_type types)
+int		fin_set(enum e_tcp_type types)
 {
-	if (types & SYN && types & ACK)
-		return (OPEN);
-	else if (types & RST && types & ACK)
+	if (types & RST && types & ACK)
 		return (CLOSE);
-	return (syn_default());
+	return (fin_default());
 }
 
-void	scan_syn(char *ipv4name)
+void	scan_fin(char *ipv4name)
 {
 	int				sock;
 
 	sock = create_socket();
 
-	send_range(sock, g_env.port, ipv4name, SYN);
+	send_range(sock, g_env.port, ipv4name, FIN);
 
 	close(sock);
-	puts("SCAN SYN DONE");
+	puts("SCAN FIN DONE");
 }

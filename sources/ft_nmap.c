@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 15:32:11 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/23 17:39:19 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:19:33 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static t_list		*init_port_list(void)
 	{
 		ft_bzero(&port, sizeof(port));
 		port.port = i;
-		port.syn_state = FILTERED;
-		port.ack_state = FILTERED;
-		port.fin_state = OPEN;
+		port.syn_state = syn_default();
+		port.ack_state = ack_default();
+		port.fin_state = fin_default();
 		port.nul_state = OPEN;
 		port.udp_state = CLOSE;
 		port.xmas_state = OPEN;

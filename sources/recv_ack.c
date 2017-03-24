@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:46:54 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/23 17:31:58 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:20:07 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void		set_in_list(t_list *port_lst, int port, enum e_tcp_type types)
 		if (p_port->port == port)
 		{
 			p_port->syn_state = syn_set(types);
-			// <type>_set(types);
+			p_port->ack_state = ack_set(types);
+			p_port->fin_state = syn_set(types);
 			break ;
 		}
 		tmp = tmp->next;
