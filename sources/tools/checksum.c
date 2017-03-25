@@ -6,16 +6,16 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 12:26:57 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/20 12:30:03 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/25 10:33:31 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nmap.h"
 
-unsigned short	csum(unsigned short *ptr, int nbytes)
+u_short		csum(u_short *ptr, int nbytes)
 {
 	register long	sum;
-	unsigned short	oddbyte;
+	u_short			oddbyte;
 	register short	answer;
 
 	sum = 0;

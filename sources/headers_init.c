@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 18:37:46 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/23 13:26:05 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/25 10:36:31 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	set_ip_header(struct ip *iph, struct sockaddr_in *dest)
 	iph->ip_sum = 0;
 	iph->ip_src.s_addr = inet_addr(g_env.source);
 	iph->ip_dst = dest->sin_addr;
-	iph->ip_sum = csum((unsigned short *)iph, iph->ip_len >> 1);
+	iph->ip_sum = csum((u_short *)iph, iph->ip_len >> 1);
 }
 
 void	set_tcp_header(struct tcphdr *tcph, enum e_tcp_type flags)

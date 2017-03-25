@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:46:54 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/24 18:46:15 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/25 10:32:35 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		set_in_list(t_list *port_lst, int port, enum e_tcp_type types)
 static void		process_return(t_list *port_lst, char buff[], ssize_t size)
 {
 	struct ip			*iph;
-	unsigned short		iplen;
+	u_short				iplen;
 	struct tcphdr		*tcph;
 	struct sockaddr_in	src;
 	struct sockaddr_in	dst;
@@ -107,12 +107,12 @@ static void		listening_socket(t_list *port_lst)
 	pthread_exit(NULL);
 }
 
-void	callback(unsigned char *ptr, const struct pcap_pkthdr *pkthdr, const unsigned char *pkt)
+void	callback(u_char *ptr, const struct pcap_pkthdr *pkthdr, const u_char *pkt)
 {
 	struct ether_header		*ethh;
 	struct ip				*iph;
 	struct tcphdr			*tcph;
-	unsigned short			iplen;
+	u_short					iplen;
 	struct sockaddr_in		src;
 	struct sockaddr_in		dst;
 
