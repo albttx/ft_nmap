@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 10:13:45 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/25 10:25:35 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/29 17:13:22 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct			s_env
 	int					port[2];
 	int					thread;
 	int					id;
+	t_list				*port_lst;
 	char				source[INET_ADDRSTRLEN];
 	enum e_scan_type	type_flags;
 }						t_env;

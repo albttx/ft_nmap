@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/25 10:45:15 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/30 15:52:07 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			ft_nmap(void);
 int			parser(char **av);
 void		print_port_lst(t_list *port_lst);
 
-void		process_return(t_list *port_lst, char buff[], ssize_t size);
+void		process_packet(u_char *ptr, const struct pcap_pkthdr *pkthdr, const u_char *pkt);
 
 void		set_ip_header(struct ip *iph, struct sockaddr_in *dest);
 void		set_tcp_header(struct tcphdr *tcph, enum e_tcp_type flags);

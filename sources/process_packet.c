@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 10:44:15 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/25 10:44:55 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/30 15:51:51 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,35 @@ static void		set_in_list(t_list *port_lst, int port, enum e_tcp_type types)
 	}
 }
 
-void		process_return(t_list *port_lst, char buff[], ssize_t size)
+void	process_packet(u_char *ptr, const struct pcap_pkthdr *pkthdr, const u_char *pkt)
 {
-	struct ip			*iph;
-	u_short				iplen;
-	struct tcphdr		*tcph;
-	struct sockaddr_in	src;
-	struct sockaddr_in	dst;
+	struct ether_header		*ethh;
+	struct ip				*iph;
+	u_short					iplen;
+	struct tcphdr			*tcph;
+	struct sockaddr_in		src;
+	struct sockaddr_in		dst;
 
-	/*printf("recv %ld ", size);*/
-	iph = (struct ip *)buff;
+	ethh = (struct ether_header *)pkt;
+	iph = (struct ip *)(pkt + sizeof(struct ether_header));
 	if (iph->ip_p == IPPROTO_TCP)
 	{
 		iplen = iph->ip_hl * 4;
-		tcph = (struct tcphdr *)(buff + iplen);
+		if (iplen < 20)
+		{
+			printf("ERROR: iplen = %d bytes, packet too small\n", iplen);
+			return ;
+		}
+		tcph = (struct tcphdr *)((void *)pkt + sizeof(*ethh) + iplen);
 		ft_bzero(&src, sizeof(src));
 		ft_bzero(&dst, sizeof(dst));
 		src.sin_addr = iph->ip_src;
 		dst.sin_addr = iph->ip_dst;
+		if (ntohs(tcph->source) == 43591)
+			return ;
 		printf("port %d ", ntohs(tcph->source));
-		set_in_list(port_lst, ntohs(tcph->source), tcp_to_enum(tcph));
+		printf(" From: %s To: %s\n", inet_ntoa(iph->ip_src), inet_ntoa(iph->ip_dst));
+		set_in_list(g_env.port_lst, ntohs(tcph->source), tcp_to_enum(tcph));
 		dbg_print_tcp_types(tcph);
 	}
-	else
-		printf("\n");
 }
