@@ -2,3 +2,9 @@
 ## Todo
 
 - [ ] Parser -i (interface) eth0
+- [ ] Multiple thread
+- [ ] UDP scan
+- [ ] rDNS
+- [X] find service
+- [ ] Refacto with arr fct ptr
+- [ ] OPT default time on libpcap
