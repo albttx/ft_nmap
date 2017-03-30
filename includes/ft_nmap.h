@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/30 15:52:07 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/30 18:36:46 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@
 # include <signal.h>
 
 # define OPEN 1
-# define FILTERED 0
-# define CLOSE -1
+# define CLOSE 0
+# define FILTERED -1
+# define UNFILTERED -2
 
 t_env		g_env;
 

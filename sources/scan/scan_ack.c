@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 14:37:34 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/24 15:17:52 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/30 18:37:12 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ack_default(void)
 int		ack_set(enum e_tcp_type types)
 {
 	if (types & RST)
-		return (OPEN);
+		return (UNFILTERED);
 	return (ack_default());
 }
 
