@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:22:20 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/22 19:27:02 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/30 16:18:55 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ static void	parse_ports(char *arg)
 	if (g_env.port[0] > g_env.port[1])
 	{
 		fprintf(stderr, "Your port range %d-%d is backwards.\n",
-				g_env.port[0], g_env.port[1]);
-		ft_freetab(p);
-		exit(EXIT_FAILURE);
-	}
-	if ((g_env.port[1] - g_env.port[0]) > 1024)
-	{
-		fprintf(stderr, "Your port range %d-%d is too long, max is 1024.\n",
 				g_env.port[0], g_env.port[1]);
 		ft_freetab(p);
 		exit(EXIT_FAILURE);
