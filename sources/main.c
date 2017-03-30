@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:26 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/23 14:28:25 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/30 18:32:21 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int		usage(char *name)
 	printf("    -t/--thread [nb of thread] : default 0 - max 250\n");
 	printf("    --scan      [type] (SYN, NULL, ACK, FIN, XMAS, UDP) : default all\n");
 	printf("                ex: --scan SYN or --scan ACK-NULL-XMAS for multiple\n");
+	printf(" 				%s OPEN  %s CLOSE  %s FILTERED %s UNFILTRED %s\n",
+			GREEN, RED, YELLOW, PURPLE, DEFAULT);
 	return (-1);
 }
 

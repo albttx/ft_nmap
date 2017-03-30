@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 10:44:15 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/30 15:51:51 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/30 18:56:42 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ void	process_packet(u_char *ptr, const struct pcap_pkthdr *pkthdr, const u_char 
 		ft_bzero(&dst, sizeof(dst));
 		src.sin_addr = iph->ip_src;
 		dst.sin_addr = iph->ip_dst;
-		if (ntohs(tcph->source) == 43591)
-			return ;
 		printf("port %d ", ntohs(tcph->source));
-		printf(" From: %s To: %s\n", inet_ntoa(iph->ip_src), inet_ntoa(iph->ip_dst));
+		printf(" From: %s To: %s \t", inet_ntoa(iph->ip_src), inet_ntoa(iph->ip_dst));
 		set_in_list(g_env.port_lst, ntohs(tcph->source), tcp_to_enum(tcph));
 		dbg_print_tcp_types(tcph);
 	}
