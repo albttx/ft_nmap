@@ -6,23 +6,11 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:31:08 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/30 18:50:35 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/03/31 18:21:54 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_nmap.h"
-
-static char		*port_state_to_str(int state)
-{
-	if (state == OPEN)
-		return ("open");
-	else if (state == CLOSE)
-		return ("close");
-	else if (state == UNFILTERED)
-		return ("unfiltred");
-	else
-		return ("filtered");
-}
 
 static int		is_default(t_port *port)
 {
@@ -82,17 +70,16 @@ static void		print_state(t_port *port)
 
 static void		print_result(t_port *port)
 {
-	if (g_env.type_flags & S_SYN)
-		printf(" %-9s|", port_state_to_str(port->syn_state));
-	else if (g_env.type_flags & S_ACK)
-		printf(" %-9s|", port_state_to_str(port->ack_state));
+	int		status;
+
+	status = get_port_status(port);
+	printf(" %-9s|", port_to_str(status));
 }
 
 void			print_port_lst(t_list *port_lst)
 {
 	t_list	*tmp;
 	t_port	*port;
-	int		state[3];
 
 	ft_bzero(state, sizeof(state));
 	tmp = port_lst;
