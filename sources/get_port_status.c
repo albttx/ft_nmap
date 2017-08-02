@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/30 18:19:32 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/31 18:14:16 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:49:08 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	find_highest(int arr[], int len)
 	{
 		if (arr[i] > high)
 			high = i;
+		i++;
 	}
 	return (high);
 }

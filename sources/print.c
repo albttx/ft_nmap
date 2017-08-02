@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:31:08 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/08/02 17:36:48 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:49:22 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,10 @@ void			print_port_lst(t_list *port_lst)
 	tmp = port_lst;
 	puts("-----------------------------------------------------------------");
 	printf("Port | Status                   | Result   | Service\n");
+	int i = 0;
 	while (tmp)
 	{
+		/*printf("coucou\n");*/
 		port = tmp->content;
 		if (is_default(port) == -1)
 		{
