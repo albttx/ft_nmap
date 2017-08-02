@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 18:17:35 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/31 18:17:33 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:34:46 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ void			*listener(void *ptr);
 void			get_local_ip(char *buffer);
 char			*hostname_to_ip(const char *hostname);
 u_short			csum(u_short *ptr, int nbytes);
-const char		*port_to_str(int port)
+const char		*port_to_str(int port);
+
+int				get_port_status(t_port *port);
 
 enum e_tcp_type	tcp_to_enum(struct tcphdr *tcph);
 

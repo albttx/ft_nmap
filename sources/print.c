@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 15:31:08 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/31 18:21:54 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:36:48 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void			print_port_lst(t_list *port_lst)
 	t_list	*tmp;
 	t_port	*port;
 
-	ft_bzero(state, sizeof(state));
 	tmp = port_lst;
 	puts("-----------------------------------------------------------------");
 	printf("Port | Status                   | Result   | Service\n");
