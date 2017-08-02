@@ -6,7 +6,7 @@
 /*   By: ale-batt <ale-batt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 19:30:55 by ale-batt          #+#    #+#             */
-/*   Updated: 2017/03/30 16:05:35 by ale-batt         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:20:35 by ale-batt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	scan(t_ip *ip)
 {
-	pthread_t			sniffer_thread;
-	int					t;
+	pthread_t	sniffer_thread;
+	int			t;
 
 	if (pthread_create(&sniffer_thread, NULL, listener, NULL) < 0)
 	{
 		perror("pthread_create");
 		exit(EXIT_FAILURE);
 	}
-	sleep(1);
+	/*sleep(1);*/
 
 	puts("START SCAN");
 	if (g_env.type_flags & S_SYN) scan_syn(ip->ipv4name);

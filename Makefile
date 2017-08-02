@@ -6,7 +6,7 @@
 #    By: World 42  <world42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/03 14:55:19 by ale-batt          #+#    #+#              #
-#*   Updated: 2017/03/25 10:24:53 by ale-batt         ###   ########.fr       *#
+#*   Updated: 2017/08/02 16:55:38 by ale-batt         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,15 @@ lib		:
 			@make -C $(LIBFT) re
 
 re		:	fclean all
+
+#------------------ Docker Rules ---------------------------------#
+
+build	:
+			docker build -f ./Dockerfile.dev -t nmap-dev .
+			docker build -f ./Dockerfile -t nmap .
+
+run-dev:
+			docker run --rm -it -v $(shell pwd):/app nmap-dev bash
 
 #------------------MY RULES ---------------------------------#
 

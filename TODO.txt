@@ -1,9 +1,19 @@
 
 ## Todo
 
+Scan to do:
+- [x] SYN
+- [x] NULL
+- [x] ACK
+- [x] FIN
+- [x] XMAS
+- [ ] UDP
+
+- [ ] Choose the number of threads
+
 - [ ] Parser -i (interface) eth0
-- [ ] Multiple thread
-- [ ] UDP scan
+- [ ] Parser print only open
+
 - [ ] rDNS
 - [X] find service
 - [ ] Refacto with arr fct ptr
