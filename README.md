@@ -16,6 +16,24 @@
                 OPEN   CLOSE   FILTERED  UNFILTRED
 ```
 
+## Build
+
+You can simply build the project with `make`,
+you might have missing header on OS X, in that case i recommend you to build the project with docker
+
+#### With Docker
+
+```
+# Build image nmap and nmap-dev
+make build
+
+# Run bash in the image (dev mode)
+make run-dev
+
+# Run nmap in the container
+$ docker run --rm --tty nmap --help
+```
+
 ## Todo
 
 Scan to do:
