@@ -4,6 +4,7 @@
 
 ## Usage
 
+```
 ./ft_nmap [options] ip
     --help
     --ip        [ip]
@@ -13,6 +14,7 @@
     --scan      [type] (SYN, NULL, ACK, FIN, XMAS, UDP) : default all
                 ex: --scan SYN or --scan ACK-NULL-XMAS for multiple
                 OPEN   CLOSE   FILTERED  UNFILTRED
+```
 
 ## Todo
 
